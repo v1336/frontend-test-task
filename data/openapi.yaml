@@ -1,0 +1,81 @@
+openapi: 3.0.3
+
+info:
+  title: V-1336 Test API
+  version: 1.0.0
+
+externalDocs:
+  description: Репозиторий тестового задания на GitHub
+  url: https://github.com/v1336/frontend-test-task
+
+servers:
+- url: https://raw.githubusercontent.com/v1336/frontend-test-task/master/
+
+paths:
+  /data/data.json:
+    get:
+      summary: getBrigades
+      description: Метод для получения доступного пользователю списка бригад
+      tags: ['Brigades']
+
+      responses:
+        200:
+          description: Список бригад успешно получен
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: Идентификатор бригады
+                      example: 1
+
+                    brigade_name:
+                      type: string
+                      description: Наименование бригады
+                      example: Бригада №1
+
+                    connection_state:
+                      type: integer
+                      enum: [0, 1]
+                      description: |
+                        Состояние связи с бригадой
+                        * `0` - Нет связи
+                        * `1` - На связи
+                      example: 1
+
+                    department:
+                      type: object
+                      description: Подразделение, к которому относится бригада
+                      properties:
+                        id:
+                          type: number
+                          description: Идентификатор подразделения
+                          example: 1
+
+                        name:
+                          type: string
+                          description: Наименование подразделения
+                          example: Лукойл
+
+                    position:
+                      type: object
+                      description: Местоположение бригады
+                      properties:
+                        field:
+                          type: string
+                          description: Месторождение
+                          example: Аксаитовское
+
+                        cluster:
+                          type: number
+                          description: Номер куста
+                          example: 136
+
+                        well:
+                          type: number
+                          description: Номер скважины
+                          example: 861
